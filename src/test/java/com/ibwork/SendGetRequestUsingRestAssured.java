@@ -1,18 +1,15 @@
 package com.ibwork;
 
-import static org.junit.Assert.assertTrue;
-//import static io.restassured.RestA;
-//import static io.restassured.matcher.restassured
-// import static io.restassured.RestAssured.*;
-// import static io.restassured.matcher.RestAssuredMatchers.*;
-// import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertTrue;
 
-// import static io.restassured.authentication;
-//import io.restassured.*;
+import java.util.concurrent.TimeUnit;
+
 import io.restassured.response.Response;
-import io.restassured.RestAssured.*;
-import io.restassured.matcher.RestAssuredMatchers.*;
-import org.hamcrest.Matchers.*;
+import io.restassured.RestAssured;
+//import io.restassured.RestAssured.*;
+//import io.restassured.matcher.RestAssuredMatchers.*;
+//import org.hamcrest.Matchers.*;
 
 import org.junit.Test;
 
@@ -28,9 +25,11 @@ public class SendGetRequestUsingRestAssured {
      */
     @Test
     public static void main (String[] args) {
-        Response resp = new Response();
-        Response response = get("lotto");
-        resp.get();
+        Response response = RestAssured.get("/users/eugenp");
+        long timeInMS = response.time();
+        long timeInS = response.timeIn(TimeUnit.SECONDS);
+    
+    assertEquals(timeInS, timeInMS/1000);
 
 
 
